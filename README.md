@@ -12,4 +12,3 @@ Ejemplo
    db.collection.find({ name: "Alfred" });
 
 ``
-
