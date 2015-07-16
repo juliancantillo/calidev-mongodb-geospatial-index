@@ -1,0 +1,43 @@
+{
+  "name": "mongodb-geospatial-index",
+  "version": "1.0.0",
+  "description": "Simple API using GeoSpatial indexes",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^2.5.11",
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.4.2",
+    "grunt-contrib-jshint": "^0.6.5",
+    "grunt-contrib-uglify": "^0.2.7",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-watch": "^0.5.3",
+    "grunt-zip": "^0.7.0",
+    "grunt-sass": "^0.14.2",
+    "mustache": "^0.7.3",
+    "node-sass": "^0.9.6",
+    "socket.io": "^0.9.17",
+    "underscore": "^1.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliancantillo/calidev-mongodb-geospatial-index.git"
+  },
+  "keywords": [
+    "mongo",
+    "express",
+    "geospatial",
+    "index"
+  ],
+  "author": "@JulianCantillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juliancantillo/calidev-mongodb-geospatial-index/issues"
+  },
+  "homepage": "https://github.com/juliancantillo/calidev-mongodb-geospatial-index#readme"
+}
