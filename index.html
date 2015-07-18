@@ -46,7 +46,79 @@
 					</p>
 				</section>
 				<section>
-					<h2>¿Qué es una RESTful API?</h2>
+				<section>
+            <h3>¿Que es una API REST?</h3>     
+            <ul>
+              <li>REST = "Representation State Transfer"</li>
+              <li>Esencialmente es sólo una alternativa a los protocolos API basadas en XML de SOAP y WSDL, más liviana, aunque no estandarizado.</li>
+              <li>Utiliza un modelo cliente-servidor, donde el servidor es en realidad un servidor HTTP.</li>
+            </ul>
+            <aside class="notes">
+              The fact that the server replies with JSON (Javascript Object Notation) makes the MEAN stack particularly well-suited to this task as all the components are in Javascript and MongoDB uses JSON notation to hold its data.
+            </aside>
+          </section>
+          <section>
+            <h3>¿Que es una API REST?</h3>     
+            <ul>
+              <li>El cliente envía verbos HTTP (GET, POST, PUT, DELETE) junto con una URL y parámetros variables que se urlencoded</li>
+              <li>La URL nos indica la entidad en la que estamos trabajando</li>
+              <li>El servidor responde con una código de respuesta y JSON válido</li>
+            </ul>
+            <aside class="notes">
+              The fact that the server replies with JSON (Javascript Object Notation) makes the MEAN stack particularly well-suited to this task as all the components are in Javascript and MongoDB uses JSON notation to hold its data.
+            </aside>
+          </section>
+          <section>
+            <h3>Verbos HTTP - Mapeo del CRUD</h3>
+            <ul>
+              <li>GET, Cuando un cliente quiere <strong>leer</strong> un objeto</li>
+              <li>POST, Cuando un cliente quiere <strong>insertar/crear</strong> un objeto</li>
+              <li>PUT, Cuando un cliente quiere <strong>actualizar</strong> un objecto</li>
+              <li>DELETE, Cuando un cliente quiere <strong>eliminar</strong> un objecto</li>
+            </ul>
+            <aside class="notes">
+              verbally go through each bullet
+            </aside>
+          </section>
+          <section>
+            <h3>Códigos de respuesta HTTP</h3>
+            <ul>
+              <li>Algunos códigos comunes que podríamos usar:
+                <ul>
+                  <li>200 - "OK"</li>
+                  <li>201 - "Created" (Usado con POST)</li>
+                  <li>400 - "Bad Request" (Validación de formulario)</li>
+                  <li>401 - "Unauthorized" (No está autorizado)</li>
+                  <li>403 - "Forbidden" (Podría estar autorizado pero no tiene los privilegios necesarios)</li>
+                  <li>404 - "Not Found" ¿Suena familiar?</li>
+                </ul>
+              </li>
+              <li>Más información <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2>¿Porqué empezar con una API REST?</h1>
+            <p>Las API REST son una forma de crear un servicio de datos para así poder crear fácilmente todas las otras aplicaciones.</p>
+            <ul>
+              <li>HTML / JavaScript</li>
+              <li>Android / iOS</li>
+              <li>IoT</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Las nuevas compañias no tienen una interfaz HTML</h3>
+            <ul>
+              <li>Debido a que todo el dinero del VC es para los que crean aplicaciones So-Lo-Mo-Co, muchas de las nuevas startups ni siquiera tienen una interfaz web, por ejemplo
+              <ul>
+                <li>Uber</li>
+                <li>WhatsApp</li>
+                <li>Postmates</li>
+                <li>Wash.io</li>
+              </ul>
+              </li>
+              <li>Crear una API REST también permiten que otras compañias/apps se conecten fácilmente a su aplicación, convirtiendo su app en una plataforma y haciendola más poderosa</li>
+            </ul>
+          </section>
 				</section>
         <section>
           <section>
@@ -66,10 +138,57 @@
               <li>Aggregation Framework</li>
             </ul>
           </section>
-          
         </section>
-			</div>
-
+        <section>
+          <section>
+            <h2>npm init</h2>
+            <p>Inicializamos nuestra app en nodejs</p>
+          </section>
+          <section>
+            <h2>Servidor básico con Express</h2>
+            <p></p>
+          </section>
+          <section>
+            <h2>Rutas</h2>
+            <ul>
+              <li>GET /</li>
+              <li>GET /api/events</li>
+              <li>POST /api/events</li>
+              <li>GET /api/events/:id</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>MongoDB</h2>
+            <p>Vamos a usar <a href="http://mongoosejs.com/" target="_blank">Mongoose</a>, para modelar los datos de la app</p>
+          </section>
+          <section>
+            <h2>Definiendo el Modelo</h2>
+            <p>Mongoose se encarga de gestionar el modelo</p>
+          </section>
+          <section>
+            <h2>MongoDB geospatial index</h2>
+            <ul>
+              <li>2d</li>
+              <li>2dGeosphere</li>
+              <li>GeoJSON <a href="http://geojson.org/geojson-spec.html">Spec</a></li>
+            </ul>
+          </section>
+        </section>
+        <section>
+        	<section>
+        		<h2>El Cliente</h2>
+        		<ul>
+        			<li>Web</li>
+        			<li>Android</li>
+        			<li>iOS</li>
+        		</ul>
+        	</section>
+        	<section>
+        		<h2>Visualizaci&oacute;n en GMaps</h2>
+        	</section>
+        </section>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
