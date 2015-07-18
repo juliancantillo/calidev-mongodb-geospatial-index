@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MongoDB Geospatial Index</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+  <style>
+      #map-canvas {
+        height: 400px;
+        margin: 0;
+        padding: 0;
+      }
+
+  </style>
+</head>
+<body>
+  <h1 class="text-center">MongoDB Geospatial Index</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div id="map-canvas"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Eventos</h3>
+            </div>
+            <ul id="lst-events" class="list-group">
+            </ul>
+            <div class="panel-footer">
+              <input id="fldDistance" placeholder="Distance in Km" value="1" type="number">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery -->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script>
+    var theMap, bounds;
+    var mapMarkers = [];
+
+    function initialize() {
+
+      (function ($) {
+        $.ajax({
+          url: '/api/events',
+          dataType: 'json'
+        })
+        .done(function(response) {
+          $.each(response, function(idx, item) {
+            $('#lst-events').html();
+
+            listEvents(item);
+          });
+
+          if (response.length) {
+            renderMarkers(response);
+          }
+        })
+        .fail(function() {
+          console.log("error");
+        });
+        
+      })(jQuery);
+
+      var mapOptions = {
+        zoom: 14,
+        center: new google.maps.LatLng(3.4483704860945092,-76.5365773262024)
+      };
+
+      theMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      bounds = new google.maps.LatLngBounds();
+
+      google.maps.event.addListener(theMap, 'dragend', searchEvents);
+    }
+
+    function searchEvents() {
+
+      var LatLng = theMap.getCenter();
+      var d = $('#fldDistance').val();
+
+      $.ajax({
+        url: '/api/events/search',
+        data: { lat: LatLng.lat(), lng: LatLng.lng(), distance: d }
+      })
+      .done(function(response) {
+        if (response.length) {
+          renderMarkers(response);
+        }
+      })
+      .fail(function() {
+        console.log("error");
+      });
+    }
+
+    function placeMarker(position, map, title) {
+      var LatLng = new google.maps.LatLng(position[1], position[0])
+
+      var marker = new google.maps.Marker({
+        position: LatLng,
+        map: map,
+        title: title
+      });
+
+      mapMarkers.push(marker);
+
+      return LatLng;
+    }
+
+    function renderMarkers (response) {
+      setAllMap(null);
+      bounds = new google.maps.LatLngBounds();
+      mapMarkers = [];
+
+      $.each(response, function(index, item) {
+        var LatLng = placeMarker(item.location.geo, theMap, item.name);
+        bounds.extend(LatLng);
+      });
+
+      //theMap.fitBounds(bounds);
+    }
+
+    function listEvents (item) {
+      var li = $('<li class="list-group-item">').html('<h4>'+ item.name +'</h4>')
+
+      $('#lst-events').append(li);
+    }
+
+    // Sets the map on all markers in the array.
+    function setAllMap(map) {
+      for (var i = 0; i < mapMarkers.length; i++) {
+        mapMarkers[i].setMap(map);
+      }
+    }
+
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
+</body>
+</html>

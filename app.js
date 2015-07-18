@@ -2,7 +2,7 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
-
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -12,10 +12,13 @@ mongoose.connect('mongodb://localhost/calidev-dev', {
       }
     });
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 require('./routes')(app);
 
 app.get('/', function (req, res) {
-  res.send('It\'s alive!');
+  res.sendFile(__dirname + '/app.html');
 });
 
 
