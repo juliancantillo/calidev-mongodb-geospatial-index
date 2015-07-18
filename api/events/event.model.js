@@ -16,4 +16,4 @@ var EventSchema = new Schema({
   loc: { type: [Number], index: '2dsphere' }, // use [ lng , lat ] format to be consistent with GeoJSON
 });
 
-mongoose.model('Event', EventSchema);
+module.exports = mongoose.model('Event', EventSchema);
